@@ -10,7 +10,8 @@ class Builder extends React.Component {
   render () {
     return(
       <div className="builderContainer">
-        <TitleField title={this.props.title} /> <br/>
+        <TitleField title={this.props.title} />
+        <br/>
         <DescriptionField description={this.props.description} />
       </div>
     );
