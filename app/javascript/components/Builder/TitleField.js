@@ -2,30 +2,29 @@ import React from "react";
 import PropTypes from "prop-types"
 import {RIEInput} from "riek";
 
-class TitleField extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = props;
-    }
-
-    onUpdate = (formData) => {
+function TitleField(props) {
+    const onUpdate = function(formData) {
         console.log(formData);
         this.setState(formData);
-    }
-  
-    render() {
-        return (
+    };
+
+    const {id, title=""} = props;
+    return (
+        <legend id={id}>
             <RIEInput
                 className="edit-in-place"
                 propName="title"
-                value={this.state.title}
-                change={this.onUpdate} />
-        );
-    } 
+                value={title}
+                change={onUpdate} />
+        </legend>
+    );
+    
 }
 
 TitleField.propTypes = {
-    title: PropTypes.string
+    id: PropTypes.string,
+    title: PropTypes.string,
+    required: PropTypes.bool,
 }
 
 export default TitleField

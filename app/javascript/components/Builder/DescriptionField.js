@@ -1,33 +1,31 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {RIETextArea} from "riek";
+import {RIEInput} from "riek";
 
-class DescriptionField extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = props;
-    }
-    
-    onUpdate = (formData) => {
+function DescriptionField(props) {    
+    const onUpdate = function(formData) {
         console.log(formData);
         this.setState(formData);
     }
 
-    render() {
-        return (
-            <RIETextArea
-                className="edit-in-place"
-                classEditing="edit-in-place-active"
-                propName="description"
-                value={this.state.description}
-                change={this.onUpdate} />
-        );
-    }
+    const { id, description=""} = props;
+    return (
+    <p id={id}>
+        <RIEInput
+            className="edit-in-place"
+            classEditing="edit-in-place-active"
+            propName="description"
+            value={description}
+            change={onUpdate} />
+    </p>
+    );
 }
 
 
 DescriptionField.propTypes = {
-    description: PropTypes.string
+    id: PropTypes.string,
+    title: PropTypes.string,
+    required: PropTypes.bool,
 }
 
 
