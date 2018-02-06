@@ -7,6 +7,27 @@ export default function FormActions(props) {
     // props.publishForm(({collection, adminToken}) => {
     //   props.history.pushState(null, `/builder/published/${adminToken}`);
     // });
+    $.ajax({
+      url: '/builder/' + props.id,
+      method: "PUT",
+      dataType: "JSON",
+      data: {
+        survey: {
+          title: props.title,
+          description: props.description,
+          data: {
+            error: props.error,
+            schema: props.schema,
+            uiSchema: props.uiSchema,
+            formData: props.formData,
+            currentIndex: props.currentIndex,
+          }
+        }
+      },
+      success: function() {
+        console.log("Saved something!");
+      }
+    })
   };
 
   let saveIconName;
