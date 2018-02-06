@@ -1,6 +1,15 @@
 class BuilderController < ApplicationController
 
     def create
+        survey = Survey.create
+        redirect_to(edit_builder_path(survey))
+    end
+
+    def edit
+        @survey = Survey.find(params[:id])
+    end
+
+    def update
     end
     
     private

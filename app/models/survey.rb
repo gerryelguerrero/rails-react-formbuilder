@@ -6,7 +6,7 @@ class Survey < ApplicationRecord
     before_validation :set_default_title, on: :create
     before_validation :set_default_description, on: :create
     before_validation :generate_slug, on: :create
-    before_validation :set_initial_state, on :create
+    before_validation :set_initial_state, on: :create
 
     private
 
@@ -26,18 +26,21 @@ class Survey < ApplicationRecord
     end
 
     def set_initial_state
-        self.data = {
-            error: null,
-            schema: {
-                type: "object",
-                title: self.set_default_title,
-                description: self.set_default_description,
-                properties: {}
-            },
-            uiSchema: {
-                "ui:order": []
-            },
-            formData: {},
-            currentIndex: 0,
-        } if data.blank?
+        if data.blank?
+            self.data = { 
+                error: nil,
+                schema: {
+                    type: "object",
+                    title: self.title,
+                    description: self.description,
+                    properties: {}
+                },
+                uiSchema: {
+                    "ui:order": []
+                },
+                formData: {},
+                currentIndex: 0
+            }
+        end
+    end
 end
