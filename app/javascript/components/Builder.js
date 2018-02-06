@@ -26,7 +26,6 @@ class Builder extends React.Component {
       },
       formData: {},
       currentIndex: 0,
-      required: 0,
     };
 
     return(

@@ -1,8 +1,6 @@
 class BuilderController < ApplicationController
 
     def create
-        survey = Survey.create
-        
     end
     
     private

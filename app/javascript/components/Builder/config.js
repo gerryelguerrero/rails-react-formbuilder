@@ -1,9 +1,5 @@
 export default {
-    projectName: process.env.PROJECT_NAME || "Formbuilder",
-    server: {
-      remote: process.env.SERVER_URL,
-      bucket: "formbuilder",
-    },
+    projectName: process.env.PROJECT_NAME || "My App",
     appURL: process.env.APP_URL || window.location.origin + window.location.pathname,
     fieldList: [
       {
