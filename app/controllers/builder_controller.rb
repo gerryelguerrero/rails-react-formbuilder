@@ -19,14 +19,17 @@ class BuilderController < ApplicationController
             format.html { redirect_to(edit_builder_path(survey)) }
         end
     end
+
+    def destroy
+        survey = Survey.find(params[:id])
+        survey.destroy    
+    end
     
     private
 
     def survey_params
-        params.require(:survey).permit(
-            :title,
-            :description,
-            :data
-        )
+        params.require(:survey).permit(:title, :description).tap do |whitelisted|
+            whitelisted[:data] = params[:survey].fetch(:data, ActionController::Parameters.new).permit!
+        end
     end
 end

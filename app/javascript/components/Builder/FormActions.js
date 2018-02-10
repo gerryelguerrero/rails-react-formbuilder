@@ -4,22 +4,19 @@ import {Button, ButtonToolbar, ButtonGroup}  from "react-bootstrap";
 
 export default function FormActions(props) {
   const onClick = (event) => {
-    // props.publishForm(({collection, adminToken}) => {
-    //   props.history.pushState(null, `/builder/published/${adminToken}`);
-    // });
+    debugger
     $.ajax({
       url: '/builder/' + props.id,
       method: "PUT",
       dataType: "JSON",
       data: {
         survey: {
-          title: props.title,
-          description: props.description,
+          title: props.schema.title,
+          description: props.schema.description,
           data: {
             error: props.error,
             schema: props.schema,
             uiSchema: props.uiSchema,
-            formData: props.formData,
             currentIndex: props.currentIndex,
           }
         }

@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :builder, only: [:create, :edit, :update, :destroy]
-  get 'survey/:slug', controller: 'survey', action: "show"
+  get 'surveys/:slug', controller: 'surveys', action: "show"
 end

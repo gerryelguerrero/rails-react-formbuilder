@@ -39,7 +39,8 @@ export default class FieldListDropdown extends Component {
         this.props.switchField(this.props.name, field);
       } else {
         let action = addField(field);
-        this.setState(form(this.state, action));
+        let newState = form(this.state, action)
+        //this.setState(form(this.state, action));
       }
     }
   }

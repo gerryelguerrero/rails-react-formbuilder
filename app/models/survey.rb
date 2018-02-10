@@ -2,6 +2,7 @@ class Survey < ApplicationRecord
 
     validates :title, presence: true
     validates :slug, presence: true, uniqueness: true
+    validates :data, presence: true
 
     before_validation :set_default_title, on: :create
     before_validation :set_default_description, on: :create
@@ -33,12 +34,12 @@ class Survey < ApplicationRecord
                     type: "object",
                     title: self.title,
                     description: self.description,
-                    properties: {}
+                    properties: nil
                 },
                 uiSchema: {
-                    "ui:order": []
+                    "ui:order": nil
                 },
-                formData: {},
+                formData: nil,
                 currentIndex: 0
             }
         end
