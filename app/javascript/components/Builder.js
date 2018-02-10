@@ -16,7 +16,7 @@ class Builder extends React.Component {
   onChange = () => {}
 
   render () {
-    // const INITIAL_STATE = {
+    // {
     //   error: null,
     //   schema: {
     //     type: "object",

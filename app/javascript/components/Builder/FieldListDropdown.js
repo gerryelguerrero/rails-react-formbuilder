@@ -18,11 +18,6 @@ export default class FieldListDropdown extends Component {
       fieldListAction = "switch_field";
     }
     this.state = {
-      currentIndex: this.props.currentIndex,
-      error: this.props.error,
-      formData: this.props.formData,
-      schema: this.props.schema,
-      uiSchema: this.props.uiSchema,
       fieldList: config.fieldList,
       fieldListAction: fieldListAction
     };
@@ -38,9 +33,7 @@ export default class FieldListDropdown extends Component {
       if (this.state.fieldListAction === "switch_field") {
         this.props.switchField(this.props.name, field);
       } else {
-        let action = addField(field);
-        let newState = form(this.state, action)
-        //this.setState(form(this.state, action));
+        this.props.addField(field);
       }
     }
   }

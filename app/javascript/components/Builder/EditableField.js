@@ -35,7 +35,7 @@ function shouldHandleDoubleClick(node) {
 class FieldPropertiesEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editedSchema: props.data.schema};
+    this.state = {editedSchema: props.schema};
   }
 
   onChange({formData}) {
@@ -43,10 +43,10 @@ class FieldPropertiesEditor extends React.Component {
   }
 
   render() {
-    const {data, onCancel, onUpdate, onDelete} = this.props;
+    const {schema, name, required, uiSchema, onCancel, onUpdate, onDelete} = this.props;
     const formData = {
-      ...data.schema,
-      ...data.required,
+      ...schema,
+      required,
       ...this.state.editedSchema,
       name: this.state.name
     };
@@ -69,7 +69,7 @@ class FieldPropertiesEditor extends React.Component {
         </div>
         <div className="panel-body">
           <Form
-            schema={data.schema}
+            schema={uiSchema.editSchema}
             formData={formData}
             onChange={this.onChange.bind(this)}
             onSubmit={onUpdate}>
@@ -115,7 +115,7 @@ function DraggableFieldContainer(props) {
 class EditableField extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {edit: true, schema: props.data.schema};
+    this.state = {edit: true, schema: props.schema};
   }
 
   componentWillReceiveProps(nextProps) {

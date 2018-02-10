@@ -1,4 +1,5 @@
 import React from "react";
+import S from "string";
 
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 import FormActions from "./FormActions";
@@ -6,11 +7,34 @@ import FormActions from "./FormActions";
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props;
+    this.state = {
+      ...props,
+      addField: this.addField.bind(this),
+    };
   }
 
-  addField() {
+  slugify(string) {
+    return S(string).slugify().replace("-", "_").s;
+  }
+
+  addField(field) {
+    let stateT = {...this.state}
+    stateT.currentIndex += 1;
+    const name = `Question ${stateT.currentIndex}`;
+    const _slug = this.slugify(name);
+
+    if (stateT.schema.properties === "") {
+      stateT.schema.properties = {};
+    }
+    stateT.schema.properties[_slug] = {...field.jsonSchema, title: name};
     
+    if (stateT.uiSchema["ui:order"] === "") {
+      stateT.uiSchema["ui:order"] = [];
+    }
+    stateT.uiSchema[_slug] = field.uiSchema;
+    stateT.uiSchema["ui:order"] = (stateT.uiSchema["ui:order"] || []).concat(_slug);
+
+    this.setState({stateT})
   }
 
   updateFormTitle(data) {
@@ -46,7 +70,6 @@ class Form extends React.Component {
       formContext: {
         updateFormTitle: this.updateFormTitle.bind(this),
         updateFormDescription: this.updateFormDescription.bind(this),
-        addField: this.addField.bind(this),
       }
     };
 
