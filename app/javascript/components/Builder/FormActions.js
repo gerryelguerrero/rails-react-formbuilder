@@ -1,10 +1,35 @@
 import React from "react";
 import FieldListDropdown from "./FieldListDropdown";
 import {Button, ButtonToolbar, ButtonGroup}  from "react-bootstrap";
+import JQuery from "jquery";
 
 export default function FormActions(props) {
   const onClick = (event) => {
-    debugger
+    let data = undefined;
+    if (JQuery.isEmptyObject(props.schema.properties)) {
+      data = {
+        error: "",
+        schema: {
+          type: "object",
+          title: "Untitled form",
+          description: "Enter some description for your form here",
+          properties: ""
+        },
+        uiSchema: {
+          "ui:order": ""
+        },
+        formData: "",
+        currentIndex: 0
+      };
+    } else {
+      data = {
+        error: props.error,
+        schema: props.schema,
+        uiSchema: props.uiSchema,
+        currentIndex: props.currentIndex,
+        formData: props.formData,
+      };
+    }
     $.ajax({
       url: '/builder/' + props.id,
       method: "PUT",
@@ -13,12 +38,7 @@ export default function FormActions(props) {
         survey: {
           title: props.schema.title,
           description: props.schema.description,
-          data: {
-            error: props.error,
-            schema: props.schema,
-            uiSchema: props.uiSchema,
-            currentIndex: props.currentIndex,
-          }
+          data
         }
       },
       success: function() {

@@ -137,7 +137,7 @@ class EditableField extends React.Component {
     const updated = pickKeys(this.props.schema, formData, ["type"]);
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});
-    this.props.updateField(
+    this.props.registry.formContext.updateField(
       this.props.name, schema, formData.required, formData.title);
   }
 
@@ -145,7 +145,7 @@ class EditableField extends React.Component {
     event.preventDefault();
     console.log("Delete action");
     if (confirm("Are you sure you want to delete this field?")) {
-      this.props.removeField(this.props.name);
+      this.props.registry.formContext.removeField(this.props.name);
     }
   }
 
@@ -156,7 +156,8 @@ class EditableField extends React.Component {
 
   handleDrop(data) {
     console.log(data);
-    const {name, swapFields, insertField} = this.props;
+    const name = this.props;
+    const {swapFields, insertField} = this.props.registry.formContext;
     if ("moved-field" in data && data["moved-field"]) {
       if (data["moved-field"] !== name) {
         swapFields(data["moved-field"], name);

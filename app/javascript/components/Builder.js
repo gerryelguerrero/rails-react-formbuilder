@@ -6,7 +6,6 @@ import Form from "./Builder/Form";
 import TitleField from "./Builder/TitleField";
 import DescriptionField from "./Builder/DescriptionField";
 import EditableField from "./Builder/EditableField";
-import { updateFormTitle, updateFormDescription, addField } from "./actions/fieldlist"
 
 class Builder extends React.Component {
   constructor(props) {

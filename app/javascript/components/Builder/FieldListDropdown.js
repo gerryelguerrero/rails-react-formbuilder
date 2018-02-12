@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import {Dropdown, MenuItem}  from "react-bootstrap";
 
 import config from "./config";
-import {addField} from "../actions/fieldlist";
-import form from "../reducers/form";
 
 export default class FieldListDropdown extends Component {
   constructor(props) {
@@ -31,7 +29,7 @@ export default class FieldListDropdown extends Component {
       const field = fieldList[fieldIndex];
 
       if (this.state.fieldListAction === "switch_field") {
-        this.props.switchField(this.props.name, field);
+        this.props.registry.formContext.switchField(this.props.name, field);
       } else {
         this.props.addField(field);
       }
